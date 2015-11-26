@@ -1,0 +1,38 @@
+_start: LDR R4, =TEST_NUM
+	MOV R5, #0
+		LDR R5, 0
+		LDR R9, 0x00000000
+
+MAIN:	LDR R1, [R4], #4
+	CMP R1, #0
+	BEQ END
+	BL ONES
+RET:	CMP R5, R0
+	MOVLT R5, R0
+END:	B END
+
+ONES:	MOV R0, #0
+Loop:	CMP R1, #0
+	BEQ END
+	LSR R2, R1, #1
+	XOR R1, R1, R2
+//Checker start
+	AND R9, R4, 0x00000001
+// store the result in temporary register R9
+		CMP R9, 0x00000001
+//Compare if it's LSB is a 1
+		ADDEQ R5, #1
+//Add a 1 if it is a one
+		LSR R5, R5 [#1]
+//Shift it by one to the right and store it back to R3
+		CMP R9, 0x00000000
+// If it is a zero then reset the count to 0
+		ANDEQ R5, R3, 0x00000000
+		LSR R5, R5 [#1]
+	B Loop
+
+ENDONES: MOV PC, LR
+TEST_NUM: .word 0x102FE00F
+	.word 0xFE700000
+
+	.end

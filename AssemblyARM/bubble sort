@@ -1,0 +1,41 @@
+def bubbleSort(a):
+    for bubble in range(len(a)-1,0,-1):
+        for i in range(bubble):
+            if a[i]>a[i+1]:
+                temp = a[i]
+                a[i] = a[i+1]
+                a[i+1] = temp
+
+a = [54,26,93,17,77,31,44,55,20]
+bubbleSort(a)
+print(a)
+ 
+
+----------In C-------------
+#include<stdio.h>
+
+int main()
+{
+    int arr[5]={2,4,5,6,1};
+
+    int i,j,tmp;
+
+    for(i=0;i<5;i++) 
+    {
+        for(j=0;j<4;j++)
+        {
+            if(arr[j]>arr[j+1])
+            {
+                tmp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=tmp;
+            }
+        }
+    }
+
+    for(i=0;i<5;i++){
+         printf("  %d",arr[i]);
+    }
+    printf("\n");
+
+    return 0;   
